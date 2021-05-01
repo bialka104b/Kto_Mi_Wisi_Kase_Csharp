@@ -6,7 +6,10 @@ namespace KtoMiWisiKase
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var dluznikApp = new DluznikApp();
+            dluznikApp.PrzedstawienieAplikacji();
+            dluznikApp.UserCoChceszZrobic();
+
         }
     }
 }

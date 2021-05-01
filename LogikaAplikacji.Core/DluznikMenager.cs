@@ -6,8 +6,11 @@ namespace KtoMiWisiKase.Core
 {
     public class DluznikMenager //Borrower Menager
     {
-        private List<Dluznik> Dluznicy { get; set; }
-
+        private List<Dluznik> Dluznicy { get; set; } = new List<Dluznik>();
+        public DluznikMenager()
+        {
+            Dluznicy = new List<Dluznik>(); //inicjalizacja listy
+        }
         public void DodajDluznika(string imie, decimal kwota)
         {
             var dluznik = new Dluznik
