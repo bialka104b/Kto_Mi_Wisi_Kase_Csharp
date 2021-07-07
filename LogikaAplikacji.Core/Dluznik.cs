@@ -8,11 +8,11 @@ namespace KtoMiWisiKase.Core
     {
         public string Imie { get; set; } //Name
         public decimal Kwota { get; set; }//kwota z liczbami po przecinku więc decimal
-
+        public string Date { get; set; }
 
         public override string ToString()
         {
-            return Imie + "; " + Kwota.ToString();
+            return Imie + "; " + Kwota.ToString() + "; " + Date;
         }
     }
 }

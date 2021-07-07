@@ -36,17 +36,20 @@ namespace KtoMiWisiKase.Core
         //MOZNA TEZ ZROBIC USUWANIE PO IMIENIU I KWOCIE, SPRAWDZIĆ TUTAJ CZY KWOTA JEST MNIEJSZA, JAK JEST MNIEJSZA TO WTEDY EDYTOWAĆ
         //mOŻNA ZAPISAC DATE W KTÓREJ DLUZNIK ZOSTAŁ DODANY dATEnOW(), PO OKREŚLONEJ LICZBIE DNI DODAJE SIĘ 5% DO KWOTY
         //
-        public void DodajDluznika(string imie, decimal kwota, bool flaga = true)
+        public void DodajDluznika(string imie, decimal kwota,  bool flaga = true)
         {
             var dluznik = new Dluznik
             {
                 Imie = imie,
-                Kwota = kwota
+                Kwota = kwota,
+                Date = DateTime.Now.ToString()
             };
             Dluznicy.Add(dluznik);
             if (flaga) {
+                var zmienna = dluznik.ToString();
                 File.WriteAllLines(PlikZDanymi, new List<string> { dluznik.ToString() });
             }
+
         }
 
         public void UsunDluznika(string imie, decimal kwota, bool flaga = true) //tu pasuje jeszcze zrobić żeby część kwoty zwracać
@@ -79,15 +82,18 @@ namespace KtoMiWisiKase.Core
         {
             var dluznicyStrings = new List<string>();
             var indekser = 1; // liczba porządkowa która będzie wyświetlana
+            
             foreach (var dluznik in Dluznicy) //dla każdego dłuznika generuj stringa
             {
-                var dluznikString = indekser + ". " + dluznik.Imie + " - " + dluznik.Kwota + " zł.";//1. Imie - kwota zł
+                var EndDate = DateTime.Now; 
+                var StartDate = DateTime.Parse(dluznik.Date);
+                var iloscDni = (EndDate.Date - StartDate.Date).Days;
+                var dluznikString = indekser + ". " + dluznik.Imie + " - " + dluznik.Kwota + " zł." + "- " + dluznik.Date + " - " + iloscDni;//1. Imie - kwota zł
                 indekser++;
 
                 dluznicyStrings.Add(dluznikString);
             } 
             return dluznicyStrings; // zwróć liste
         }
-
     }
 }
